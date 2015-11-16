@@ -3,63 +3,161 @@
 <head>
   <title>Houses</title>
   <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="styles.css">
   <script src="angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="houses2.js"></script>
 </head>
 
-<style>
-    .row{
-        line-height: 60px;
-    }
-    .odd{
-        background-color: #c3c3c3;
-
-    }
-    h4{
-        line-height: 60px;
-        margin: 0px;
-    }
-    
-</style>
 
 <body ng-controller = "myController">
+
   <div class="container" ng-show="view=='list'">
-        <div class="row" ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat = "house in houses">
-            <div class="col-md-3">
-                <h3>{{$index+1}}</h3>
-            </div>
-            <div class="col-md-3">
-                <h4>{{house.title}}</h4>
-            </div>
-            <div class="col-md-3 col-md-offset-1">
-                <h4>{{house.street_address}}</h4>
-            </div>
-            <div class="col-md-1">
-                <button class="btn btn-danger" ng-click="deleteListing($index)">Delete</button>
-            </div>  
-            <div class="col-md-1">
-                <button class="btn btn-primary" ng-click="editListing($index)">Edit</button>
-            </div>
 
+    <div class="row">
+        <h1>Listings</h1>
+    </div>
 
+    <div class="row" ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat = "house in houses">
+        <div class="col-md-1">
+            <h3>{{$index+1}}</h3>
         </div>
+        <div class="col-md-3">
+            <h4>{{house.title}}</h4>
+        </div>
+        <div class="col-md-3">
+            <h4>{{house.street_address}}</h4>
+        </div>
+        <div class="col-md-3">
+            <h4>{{house.price}}</h4>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger" ng-click="deleteListing($index)">Delete</button>
+        </div>  
+        <div class="col-md-1">
+            <button class="btn btn-primary" ng-click="editListing($index)" id="edit-button">Edit</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
+        </div>
+    </div>
   </div>
-  <div class="container" ng-show="view=='edit'">
+
+
+  <div class="container" ng-show="view=='edit'" id="edit">
     <form ng-submit="updateListing($index)">
-        <h3>Name: <input type="text" placeholder="{{home.title}}" ng-model="title"></h3>
-        <h3>Address: <input type="text" placeholder="{{home.street_address}}" ng-model="street_address"></h3>
-        <h3>City/State/Zip: <input type="text" placeholder="{{home.city_state_zip}}" ng-model="city_state_zip"></h3>
-        <h3>List Price <input type="text" placeholder="{{home.price}}" ng-model="price"></h3>
-        <h3>Zestimate: <input type="text" placeholder="{{home.zestimate}}" ng-model="zestimate"></h3>
-        <h3>Deal Type: <input type="text" placeholder="{{home.type_of_deal}}" ng-model="type_of_deal"></h3>
-        <h3>Mortgage Payment: <input type="text" placeholder="{{home.mortgage}}" ng-model="mortage"></h3>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3"><h1>Edit Listing</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Name: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.title}}" ng-model="title"></div>
+        </div>
+ 
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Address: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.street_address}}" ng-model="street_address"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">City/State/Zip: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.city_state_zip}}" ng-model="city_state_zip"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Status: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.for_sale}}" ng-model="for_sale"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">List Price </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.price}}" ng-model="price"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Zestimate: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.zestimate}}" ng-model="zestimate"></div>
+        </div>
+
+        <div class="row">   
+            <div class="col-md-3 col-md-offset-3">Deal Type: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.type_of_deal}}" ng-model="type_of_deal"></div>
+        </div>
+
+        <div class="row">      
+            <div class="col-md-3 col-md-offset-3">Mortgage Payment: </div>
+            <div class="col-md-3"><input type="text" placeholder="{{home.mortgage}}" ng-model="mortage"></div>
+        </div>
 
 
-
-
-
-        <button class="btn btn-danger" ng-click="listView()">Cancel</button>
-        <input type="submit" class="btn btn-primary">
+        <div class="row" id="buttons">
+            <div class="col-md-6 col-md-offset-3">
+              <button class="btn btn-danger" ng-click="listView()" id="cancelbutton">Cancel</button>
+             <input type="submit" class="btn btn-primary" id="editsubmit">
+            </div>
+        </div>
+    </form>
   </div>
+
+
+    <div class="container" ng-show="view=='add'" id="add">
+        <div class="row">
+            <div class="col=mid-6">
+                <h1>Add a New Listing</h1>
+            </div>
+        </div>
+      <form>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Name: </div>
+            <div class="col-md-3"><input type="text" ng-model="title"></div>
+        </div>
+ 
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Address: </div>
+            <div class="col-md-3"><input type="text"  ng-model="street_address"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">City/State/Zip: </div>
+            <div class="col-md-3"><input type="text"  ng-model="city_state_zip"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Status: </div>
+            <div class="col-md-3"><input type="text"  ng-model="for_sale"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">List Price </div>
+            <div class="col-md-3"><input type="text"  ng-model="price"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">Zestimate: </div>
+            <div class="col-md-3"><input type="text"  ng-model="zestimate"></div>
+        </div>
+
+        <div class="row">   
+            <div class="col-md-3 col-md-offset-3">Deal Type: </div>
+            <div class="col-md-3"><input type="text"  ng-model="type_of_deal"></div>
+        </div>
+
+        <div class="row">      
+            <div class="col-md-3 col-md-offset-3">Mortgage Payment: </div>
+            <div class="col-md-3"><input type="text"  ng-model="mortage"></div>
+        </div>
+
+        <div class="row" id="buttons">
+            <div class="col-md-6 col-md-offset-3">
+                <button class="btn btn-danger" ng-click="listView()">Cancel</button>
+                <button class="btn btn-primary" ng-click="addNewListing()">Add</button>
+            </div>
+        </div>
+
+      </form>
+    </div>
+
+
 </body>

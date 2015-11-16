@@ -42,19 +42,39 @@ angular.module('myApp', []).controller('myController', housesListCtrl);
 		}
 
 		$scope.updateListing = function(index){
+			if($scope.title!=null){
+				houses[indexValue].title = $scope.title;
+			}
+			if($scope.street_address!=null){
+				houses[indexValue].street_address = $scope.street_address;
+			}
+			if($scope.city_state_zip!=null){
+				houses[indexValue].city_state_zip = $scope.city_state_zip;
+			}
+			if($scope.for_sale!=null){
+				houses[indexValue].for_sale = $scope.for_sale;
+			}
+			if($scope.price!=null){
+				houses[indexValue].price = $scope.price;
+			}
+			if($scope.zestimate!=null){
+				houses[indexValue].zestimate = $scope.zestimate;
+			}
+			if($scope.type_of_deal!=null){
+				houses[indexValue].type_of_deal = $scope.type_of_deal;
+			}
+			if($scope.mortgage!=null){
+				houses[indexValue].mortgage = $scope.mortgage;
+			}
+			$scope.view = 'list';
+		}
 
-			houses[indexValue].title = $scope.title;
-			houses[indexValue].street_address = $scope.street_address;
-			houses[indexValue].city_state_zip = $scope.city_state_zip;
-			houses[indexValue].price = $scope.price;
-			houses[indexValue].zestimate = $scope.zestimate;
-			houses[indexValue].type_of_deal = $scope.type_of_deal;
-			houses[indexValue].mortgage = $scope.mortgage;
+		$scope.addListing = function(){
+			$scope.view = 'add';
+		}
 
-
-
-
-
+		$scope.addNewListing = function(){
+			houses.push(new Houses($scope.title, '-', '-', $scope.street_address, $scope.for_sale, $scope.price, $scope.zestimate, $scope.type_of_deal, $scope.mortgage));
 			$scope.view = 'list';
 		}
 

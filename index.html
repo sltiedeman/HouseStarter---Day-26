@@ -11,7 +11,15 @@
     <h1>My Houses List (in Angular)</h1>
     Filter! <input type="text" ng-model="searchHouses">
     <div class="row">
-      <div class="col-sm-4" ng-repeat="house in housesArray | filter:searchHouses">
+        <div class="col-sm-5">
+            <button class="btn btn-primary btn-lg" ng-click="addHouse()" ng-disabled="!enableAdd()">Add New House</button>
+            <button class="btn btn-danger btn-lg" ng-click="removeHouses()">Clear All Houses</button>          
+        </div>
+        <div class="col-sm-4 col-sm-offset-3">
+            <input class="form-control input-lg" placeholder="Search" ng-model="searchHouses">
+    </div>
+    <div class="row">
+      <div class="col-sm-4" ng-repeat="house in houses | filter:searchHouses">
         <h3>{{house.title}}</h3>
         <p><img ng-src="{{house.image}}" width="{{house.image_width}}"></p>
         <h4>{{house.address}}</h4>

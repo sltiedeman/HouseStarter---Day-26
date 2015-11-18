@@ -98,10 +98,6 @@ myApp.controller('myController', housesListCtrl);
 	function housesListCtrl($scope, $routeParams){
 		$scope.houses = houses;
 
-		$scope.listView = function(){
-			$scope.view = 'list';
-		}
-
 		$scope.deleteListing = function(index){
 			$scope.houses.splice(index,1);
 		}

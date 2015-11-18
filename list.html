@@ -21,12 +21,12 @@
             <button class="btn btn-danger" ng-click="deleteListing($index)">Delete</button>
         </div>  
         <div class="col-md-1">
-            <a href="#/edit"><button class="btn btn-primary" id="edit-button">Edit</button></a>
+            <a href="#/edit/{{$index}}" ><button class="btn btn-primary" id="edit-button">Edit</button></a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-1">
-            <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
+            <a href="#/add"><button class="btn btn-primary">Add Listing</button></a>
         </div>
     </div>
   </div>

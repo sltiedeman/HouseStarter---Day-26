@@ -19,6 +19,10 @@ houses.push(new Houses('The Awesome', 'http://ak.t1.tiles.virtualearth.net/tiles
 houses.push(new Houses('Versailles', 'http://photos3.zillowstatic.com/p_h/ISx35uo0fixyhb0000000000.jpg', '200', '5115 Northside Dr', 'Atlanta, GA 30327', 'For Sale', '$8,000,000', '12,360,014', 'A crazy deal!! (30% Off!)', '$29,821/mo'));
 var indexValue = 0;
 
+
+//--------------------Angular code below--------------------------
+
+
 var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function($routeProvider){
@@ -28,16 +32,63 @@ myApp.config(function($routeProvider){
 	}).
 	when('/add',{
 		templateUrl: 'add.html',
-		controller: 'myController'
+		controller: 'addController'
 	}).
-	when('/edit',{
+	when('/edit/:index',{
 		templateUrl: 'edit.html',
-		controller: 'myController'
+		controller: 'editController'
 	}).
 	otherwise({
 		redirectTo: 'list.html'
 	});
 });
+
+
+
+myApp.controller('editController',function($scope, $routeParams, $location){
+	index = $routeParams.index;
+	$scope.home = houses[index];
+	console.log($scope.home);
+	$scope.save = function(){
+		if($scope.title!=null){
+			houses[index].title = $scope.title;
+			console.log("Hello");
+		}
+		if($scope.street_address!=null){
+			houses[index].street_address = $scope.street_address;
+		}
+		if($scope.city_state_zip!=null){
+			houses[index].city_state_zip = $scope.city_state_zip;
+		}
+		if($scope.for_sale!=null){
+			houses[index].for_sale = $scope.for_sale;
+		}
+		if($scope.price!=null){
+			houses[index].price = $scope.price;
+		}
+		if($scope.zestimate!=null){
+			houses[index].zestimate = $scope.zestimate;
+		}
+		if($scope.type_of_deal!=null){
+			houses[index].type_of_deal = $scope.type_of_deal;
+		}
+		if($scope.mortgage!=null){
+			houses[index].mortgage = $scope.mortgage;
+		}
+		$location.path("/");
+	}
+
+});
+
+myApp.controller('addController',function($scope, $location){
+	
+	$scope.add = function(){
+		houses.push(new Houses($scope.title, '-', '-', $scope.street_address, $scope.for_sale, $scope.price, $scope.zestimate, $scope.type_of_deal, $scope.mortgage));
+		$location.path("/");
+	}
+
+});
+
 
 
 myApp.controller('myController', housesListCtrl);
@@ -46,7 +97,7 @@ myApp.controller('myController', housesListCtrl);
 
 	function housesListCtrl($scope, $routeParams){
 		$scope.houses = houses;
-		$scope.view = 'list';
+
 		$scope.listView = function(){
 			$scope.view = 'list';
 		}
@@ -54,50 +105,6 @@ myApp.controller('myController', housesListCtrl);
 		$scope.deleteListing = function(index){
 			$scope.houses.splice(index,1);
 		}
-
-		$scope.editListing = function(index){
-			// $scope.view = 'edit';
-			$scope.home = houses[index];
-			indexValue = index;
-		}
-
-		$scope.updateListing = function(index){
-			if($scope.title!=null){
-				houses[indexValue].title = $scope.title;
-			}
-			if($scope.street_address!=null){
-				houses[indexValue].street_address = $scope.street_address;
-			}
-			if($scope.city_state_zip!=null){
-				houses[indexValue].city_state_zip = $scope.city_state_zip;
-			}
-			if($scope.for_sale!=null){
-				houses[indexValue].for_sale = $scope.for_sale;
-			}
-			if($scope.price!=null){
-				houses[indexValue].price = $scope.price;
-			}
-			if($scope.zestimate!=null){
-				houses[indexValue].zestimate = $scope.zestimate;
-			}
-			if($scope.type_of_deal!=null){
-				houses[indexValue].type_of_deal = $scope.type_of_deal;
-			}
-			if($scope.mortgage!=null){
-				houses[indexValue].mortgage = $scope.mortgage;
-			}
-			$scope.view = 'list';
-		}
-
-		$scope.addListing = function(){
-			$scope.view = 'add';
-		}
-
-		$scope.addNewListing = function(){
-			houses.push(new Houses($scope.title, '-', '-', $scope.street_address, $scope.for_sale, $scope.price, $scope.zestimate, $scope.type_of_deal, $scope.mortgage));
-			$scope.view = 'list';
-		}
-
 
 		
 	}

@@ -48,7 +48,6 @@ myApp.config(function($routeProvider){
 myApp.controller('editController',function($scope, $routeParams, $location){
 	index = $routeParams.index;
 	$scope.home = houses[index];
-	console.log($scope.home);
 	$scope.save = function(){
 		if($scope.title!=null){
 			houses[index].title = $scope.title;
@@ -91,18 +90,14 @@ myApp.controller('addController',function($scope, $location){
 
 
 
-myApp.controller('myController', housesListCtrl);
+myApp.controller('myController', function($scope, $routeParams){
 
-
-
-	function housesListCtrl($scope, $routeParams){
 		$scope.houses = houses;
 
 		$scope.deleteListing = function(index){
 			$scope.houses.splice(index,1);
 		}
-
 		
-	}
+	});
 
 	
